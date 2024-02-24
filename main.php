@@ -10,7 +10,14 @@ if(isset($_POST['submit'])){
 	$phone=$_POST['phone'];
 	// $gender=$_POST['gender'];
 	$address=$_POST['address'];
-$sql="INSERT INTO student_details(firstname,lastname,dob,email,phone,address)
+    $sql1="SELECT * FROM student_details WHERE  email='$email'";
+	$sql1_run=mysqli_query($conn,$sql1);
+	$sql1_count=mysqli_num_rows($sql1_run);
+	if($sql1_count>0){
+		echo "data already exist";
+
+	}else{
+		$sql="INSERT INTO student_details(firstname,lastname,dob,email,phone,address)
      VALUES('$fname','$lname','$dob','$email','$phone','$address')";
 	 $result=mysqli_query($conn,$sql); //true or false
 
@@ -22,6 +29,9 @@ $sql="INSERT INTO student_details(firstname,lastname,dob,email,phone,address)
 		echo "Error: " . mysqli_error($conn); // Print error message
 	}
 }
+
+
+	}
 
 $sql1="SELECT * FROM student_details";
 $sql1insert=mysqli_query($conn,$sql1);
@@ -415,7 +425,7 @@ $(document).ready(function(){
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="" method="post" >
+				<form action="" method="post"  >
 					<div class="modal-header">						
 						<h4 class="modal-title">Add Student</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -627,8 +637,6 @@ $(document).ready(function(){
 	})
 </script>
 
-
-	
 
 
 
